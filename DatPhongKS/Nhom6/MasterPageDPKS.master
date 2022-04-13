@@ -1,0 +1,185 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPageDPKS.master.cs" Inherits="MasterPageDPKS" %>
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+
+
+    <link href="css/trangchucss.css" rel="stylesheet" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/reset.css" rel="stylesheet" />
+    <link href="css/slick.css" rel="stylesheet" />
+    <link href="css/slick-theme.css" rel="stylesheet" />
+    <script src="js/jquery-3.1.1.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/slick.min.js"></script>
+    <script src="js/j-query.js"></script>
+    <script src="js/jquery-latest.pack.js"></script>
+    <script src="js/jcarousellite_1.0.1c4.js"></script>
+    <script src="js/jquery.vticker.js"></script>
+    
+</head>
+<body>
+
+    <form id="form1" runat="server">
+        <div class="header">
+
+            <div class="wap_menu">
+                <div class="container">
+                    <%--<div class="row">--%>
+                    <div class="menu">
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <a href="Home.aspx">
+                                    <img width="auto" height="50px" src="images/logo.png" alt="Logo">
+                                </a>
+                            </div>
+                            <div class="smoothmenu col-sm-8">
+                                <ul>
+                                    <li>
+                                        <a href="Home.aspx">Trang chủ
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Giới thiệu
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Đặt phòng
+                                        </a>
+                                        <ul class="sub__menu">
+                                            <li>
+                                                <a href="#">Danh sách phòng</a>
+
+                                                <ul class="sub__menu">
+                                                    <li>
+                                                        <a href="/phonghot.aspx">Phòng hot nhất</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="/phongmoi.aspx">Phòng mới thêm</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+
+                                            <li>
+                                                <a href="/khachsan.aspx">Danh sách khách sạn</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="Tintuc.aspx">Tin tức
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="Lienhe.aspx">Liên hệ
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="row">
+                                    <div style="display: flex;text-align:center">
+                                        <ul>
+                                            <li class="showtt"><asp:HyperLink runat="server" CssClass="logged" Text="thanhlongzzz" NavigateUrl="~/ThongTinCaNhan.aspx" ID="txtThongTinCaNhan" Visible="false"/>
+                                                <ul>
+                                                    <li class="thongtin"><asp:HyperLink runat="server" Text="Phòng đã thuê" NavigateUrl="/DaThue.aspx"></asp:HyperLink></li>
+                                                </ul>
+                                            </li>
+                                            
+                                        </ul>
+
+                                        <asp:Button ID="btnDangXuat" CssClass="btn-primary btn" Text="Đăng xuất" runat="server"  Visible="false" OnClick="btnDangXuat_Click"/>
+                                        <asp:Button ID="btnDangKi" CssClass="btn-primary btn" OnClick="btnDangKi_Click" Text="Đăng kí" runat="server" Visible="true" />
+                                        &nbsp;					
+                                            <asp:Button ID="btnDangNhap" CssClass="btn-primary btn" Text="Đăng nhập" runat="server" OnClick="btnDangNhap_Click"  Visible="true" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <%--</div>--%>
+                </div>
+            </div>
+            <div class="under_menu">
+            </div>
+        </div>
+        <div class="clearfix">
+        </div>
+        <div class="container">
+
+            <div class="slide">
+                <div id="search">
+                    <div class="input-group" id="adv-search">
+                        <asp:TextBox Width="200px" ID="txtSearch" type="text" CssClass="form-control" runat="server" placeholder="Nhập từ khóa tìm kiếm..." />
+                        <div class="input-group-btn">
+                            <div class="btn-group" role="group">
+                                    <asp:ImageButton OnClick="Timkiem" ID="btnSearch" CssClass="btn btn-primary" runat="server" src="images/search.png" Width="39px" Style="border: none;margin-left: -1px" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <br />
+                <br />
+                <div class="list-group">
+                    <h1 class="list-group-item active">Hệ thống đặt phòng khách sạn online</h1>
+                    <asp:ListView ID="ListViewPhongTheoTinh" runat="server" >
+                            <ItemTemplate>
+                                <a href="/PhongTheoTinh.aspx?provinceID=<%# Eval("ProvinceID") %>" class="list-group-item"><%# Eval("ProvinceName") %> (<%# Eval("SoPhong") %> phòng)</a>
+                            </ItemTemplate>
+                            <EmptyItemTemplate>
+                                <li class="list-group-item">Chưa có dữ liệu</li>
+                            </EmptyItemTemplate>
+                            
+                        </asp:ListView>
+                </div>
+
+
+            </div>
+            <div class="col-md-9">
+                <div style="margin-top: 10px">
+                    
+                        <h2 class="tieudegiua" style="margin-top:35px;">
+                    <span class="title-content"><asp:ContentPlaceHolder ID="TieuDe" runat="server">
+
+                    </asp:ContentPlaceHolder></span>
+                </h2>
+                    <asp:ContentPlaceHolder ID="NoiDung" runat="server">
+
+                        
+
+                    </asp:ContentPlaceHolder>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="end">
+                <div class="container" style="margin-top: 63px;">
+                    <div class="col-md-4">
+                        <div class="footer_container">
+                            <h3>QUẢN LÝ KHÁCH SẠN</h3>
+                            <p>Trịnh Hữu Vinh</p>
+                            <p>Trần Văn Đức</p>
+                            <p>Nguyễn Phong Hào</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-4">
+                        <div class="footer_container">
+
+                           
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</body>
+</html>
+
